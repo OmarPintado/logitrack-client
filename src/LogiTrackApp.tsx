@@ -4,9 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 function LogiTrackApp() {
     return (
         <BrowserRouter>
-
-                <LoginRouter />
-
+            <LoginRouter />
         </BrowserRouter>
     );
 }

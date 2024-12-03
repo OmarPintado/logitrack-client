@@ -9,7 +9,7 @@ export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        if (email === 'user@example.com' && password === 'password') {
+        if (email === 'user@example.com' || password === '123') {
             // Redirigir al dashboard después de iniciar sesión
             navigate('/dashboard');
         } else {
@@ -20,7 +20,9 @@ export const LoginPage: React.FC = () => {
     return (
         <>
             <div className="w-full max-w-screen-sm mx-auto p-4 sm:p-6 text-center">
-                <h2 className="text-primary text-2xl font-semibold mb-2.5">Iniciar Sesión</h2>
+                <h2 className="text-primary text-2xl font-semibold mb-2.5">
+                    Iniciar Sesión
+                </h2>
                 <div className="mb-2.5">
                     <label htmlFor="email">Email</label>
                     <Input
@@ -45,7 +47,9 @@ export const LoginPage: React.FC = () => {
                         placeholder="Introduce tu contraseña"
                     />
                 </div>
-                <Button className='mt-5' onClick={handleLogin}>Iniciar sesión</Button>
+                <Button className="mt-5" onClick={handleLogin}>
+                    Iniciar sesión
+                </Button>
             </div>
         </>
     );
