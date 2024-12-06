@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Lock, LogInIcon, Mail } from 'lucide-react';
+import { toast } from '@/hooks/use-toast.ts';
 
 export const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -10,18 +11,27 @@ export const LoginPage: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const logoDevuelvePe =
-        'https://djparty-server-users.s3.sa-east-1.amazonaws.com/DevuelvePE%20rezise.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIA2AUOPC7S5CWRHYZJ%2F20241206%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241206T041318Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGwaCXNhLWVhc3QtMSJHMEUCIQDY5%2Bx1E48pphh6sXdZ0bmSJVStQD5XaZzS9t6ovVQ4SwIgZ%2FUxAu7k1qtj8DlqZhLP121VmBUKLb%2BYohovcjjprDIq7AIIJRAAGgw2ODg1NjcyOTM5MjUiDI2CAfJIYtjOFQaZNyrJArRVOJYLxx5V9xT0qx37LviYYZ9ERF7nAdJl2n%2F%2FNh2GMr9O5hpKYUmeDRDktiDVxMgfViiX25rX5C6KzD5sqogpXTvsB5v1aDxFkYM5huyFdeRkARhuWC7KTOioQP%2BPrX%2F%2FtQ3H8YjkhWkuXY7HLhJrNomN57CoR%2BQlceMA3CUjAwOOMGGAP5x5n%2BAdaNh9XmzRot260%2Bk8En8BDKVlPwVbU4h7OCCSr3C4sknmWR9uEhLDxwRMzlFfo4spewvSQl2gJOtbQtJ00cLNZuzglb80%2FGlMQwk9xuFYy3GyRbrBPhwKIrw6SqH8rRTLNdYydnget2mBjzdf%2Bh05K3%2F5IBBYFxlXsLG5quPmj5MBY6NyVrHBlleDO6dwH70MkWtiSpLImyPJStq6XGm6Qfp%2FJG%2FshI%2BnkhWl%2F4n2bVzyElmc7XEX60TIhrTMMLLzyboGOrMCtP21OTW%2FfMaHm3RyO31wgYnJVhCldsXxox%2BCgGkNzkuNRbpJ5JhsLNGKPWh6z4FvPqN4wzHzkbwK6gwfDKmqvv6TWV5ol3zBaUX8pwiQBCeIVEFq0njQHqk%2FjBQlnwBwhVThjeOYdJbAGzTS%2Byb4xpkb%2FG%2FnlowVglf9AQYOaDBcD31VnJuegUEe4mGdURClensF7eesfc9vxDPpanP%2FqlAYht6rL7HsxK6cnSz4ykjSVVKnzkqaS8nrk6Vq5PeBQ3bBgb%2BGqyWVjb5LBF0DDVLgXYJtX9i2lJ2giIJyY1whRgm2JpOeGX49JLRPneDCC8W8212MASdUhGCx9U6MkBEschMSrvp9d6llMnivfrNDLMT4BV289IzClBxCj7TqpBUBW9caLcP4u%2BMdYqdpy3clzA%3D%3D&X-Amz-Signature=0412b05fd1692c684df9e04cf9bcdc5cbfad71028a31bf15e56e15bc665876bb&X-Amz-SignedHeaders=host&response-content-disposition=inline';
+        'https://djparty-server-users.s3.sa-east-1.amazonaws.com/ca764e72-340c-414d-8663-0b93860c709d.png';
 
     const togglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
     };
 
     const handleLogin = () => {
-        if (email === 'user@example.com' || password === '123') {
-            // Redirigir al dashboard después de iniciar sesión
-            navigate('/dashboard');
+        // Lógica para manejar el inicio de sesión
+        const credentialsValid =
+            email === 'test@example.com' || password === '123'; // Validación de ejemplo
+
+        if (!credentialsValid) {
+            // Mostrar el toast si las credenciales son incorrectas
+            toast({
+                title: 'Error de inicio de sesión',
+                description: 'Las credenciales proporcionadas son incorrectas.',
+                variant: 'destructive',
+                duration: 3000,
+            });
         } else {
-            alert('Credenciales incorrectas');
+            navigate('/dashboard');
         }
     };
 
