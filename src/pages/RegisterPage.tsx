@@ -13,7 +13,6 @@ export const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleRegister = () => {
-        // Implementar la lógica para registrar al usuario
         console.log('User registered', { name, email, password });
         navigate('/login'); // Redirigir al login después de registrarse
     };
@@ -64,7 +63,7 @@ export const RegisterPage: React.FC = () => {
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                     placeholder="Nombre"
-                    className="pl-10" // Agregar un padding a la izquierda para el ícono
+                    className="pl-10"
                 />
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
@@ -77,7 +76,7 @@ export const RegisterPage: React.FC = () => {
                     value={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                     placeholder="Correo electrónico"
-                    className="pl-10" // Agregar un padding a la izquierda para el ícono
+                    className="pl-10"
                 />
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
@@ -90,7 +89,7 @@ export const RegisterPage: React.FC = () => {
                     value={password}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     placeholder="Contraseña"
-                    className="pl-10" // Agregar un padding a la izquierda para el ícono
+                    className="pl-10"
                 />
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <button
