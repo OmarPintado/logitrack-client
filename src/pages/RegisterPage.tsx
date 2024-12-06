@@ -110,7 +110,7 @@ export const RegisterPage: React.FC = () => {
             <div className="my-5">
                 <p>
                     ¿Ya tienes una cuenta?{' '}
-                    <a href="/login" className="text-blue-500 hover:underline">
+                    <a href="/" className="text-blue-500 hover:underline">
                         Iniciar sesión
                     </a>
                 </p>
