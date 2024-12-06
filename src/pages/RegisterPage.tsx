@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, User, Mail, Lock, Camera } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, Camera } from 'lucide-react'; // Ejemplo de íconos de SHADCN
 
 export const RegisterPage: React.FC = () => {
     const [name, setName] = useState('');
@@ -57,31 +57,29 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             {/* Campo de nombre */}
-            <div className="mb-6">
-                <div className="relative">
-                    <Input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-                        placeholder="Nombre"
-                        icon={<User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />}
-                    />
-                </div>
+            <div className="mb-6 relative">
+                <Input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                    placeholder="Nombre"
+                    className="pl-10" // Agregar un padding a la izquierda para el ícono
+                />
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
 
             {/* Campo de email */}
-            <div className="mb-6">
-                <div className="relative">
-                    <Input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                        placeholder="Correo electrónico"
-                        icon={<Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />}
-                    />
-                </div>
+            <div className="mb-6 relative">
+                <Input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                    placeholder="Correo electrónico"
+                    className="pl-10" // Agregar un padding a la izquierda para el ícono
+                />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
 
             {/* Campo de contraseña */}
@@ -92,10 +90,9 @@ export const RegisterPage: React.FC = () => {
                     value={password}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     placeholder="Contraseña"
-                    icon={
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-                    }
+                    className="pl-10" // Agregar un padding a la izquierda para el ícono
                 />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <button
                     type="button"
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
@@ -113,7 +110,7 @@ export const RegisterPage: React.FC = () => {
             <div className="my-5">
                 <p>
                     ¿Ya tienes una cuenta?{' '}
-                    <a href="/" className="text-blue-500 hover:underline">
+                    <a href="/login" className="text-blue-500 hover:underline">
                         Iniciar sesión
                     </a>
                 </p>
