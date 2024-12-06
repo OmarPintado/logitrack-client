@@ -74,7 +74,7 @@ export const LoginPage: React.FC = () => {
                     <p>
                         ¿Eres usuario nuevo?{' '}
                         <a
-                            href="/registro"
+                            href="/register"
                             className="text-blue-500 hover:underline"
                         >
                             Regístrate
