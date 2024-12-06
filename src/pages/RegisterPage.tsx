@@ -29,7 +29,9 @@ export const RegisterPage: React.FC = () => {
 
     return (
         <div className="w-full max-w-screen-sm mx-auto p-4 sm:p-6 text-center">
-            <h2 className="text-primary text-2xl font-semibold my-10">Crear Cuenta</h2>
+            <h2 className="text-primary text-2xl font-semibold my-10">
+                Crear Cuenta
+            </h2>
 
             {/* Imagen de perfil */}
             <div className="mb-6">
@@ -61,7 +63,9 @@ export const RegisterPage: React.FC = () => {
                     type="text"
                     id="name"
                     value={name}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setName(e.target.value)
+                    }
                     placeholder="Nombre"
                     className="pl-10"
                 />
@@ -74,7 +78,9 @@ export const RegisterPage: React.FC = () => {
                     type="email"
                     id="email"
                     value={email}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setEmail(e.target.value)
+                    }
                     placeholder="Correo electrónico"
                     className="pl-10"
                 />
@@ -87,7 +93,9 @@ export const RegisterPage: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     value={password}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setPassword(e.target.value)
+                    }
                     placeholder="Contraseña"
                     className="pl-10"
                 />

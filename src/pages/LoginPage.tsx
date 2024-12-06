@@ -10,8 +10,6 @@ export const LoginPage: React.FC = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const logoDevuelvePe =
-        'https://djparty-server-users.s3.sa-east-1.amazonaws.com/ca764e72-340c-414d-8663-0b93860c709d.png';
 
     const togglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
@@ -43,7 +41,7 @@ export const LoginPage: React.FC = () => {
                 </h2>
 
                 <img
-                    src={logoDevuelvePe}
+                    src={import.meta.env.VITE_LOGO_URL}
                     alt="logo devuelve.pe"
                     className="flex m-auto w-1/3"
                 />
