@@ -10,13 +10,15 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 default:
-                    'bg-custom-green text-primary-foreground shadow hover:bg-primary/90',
+                    'bg-custom-green text-primary-foreground shadow hover:bg-custom-green/70',
                 destructive:
                     'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
                 outline:
-                    'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+                    'border border-custom-green shadow-sm hover:bg-accent hover:text-accent-foreground',
                 secondary:
-                    'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+                    'bg-custom-yellow text-secondary-foreground/70 shadow hover:bg-custom-yellow/70',
+                tertiary:
+                    'bg-background text-secondary-foreground shadow-sm hover:bg-secondary/80',
                 ghost: 'hover:bg-accent hover:text-accent-foreground',
                 link: 'text-primary underline-offset-4 hover:underline',
             },
