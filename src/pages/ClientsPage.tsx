@@ -69,7 +69,8 @@ export const ClientsPage: React.FC = () => {
             label: 'Amortizar deuda',
             icon: <CreditCard className="mr-2" />,
             onClick: () => handleAmortize(clientName),
-        },{
+        },
+        {
             label: 'Editar cliente',
             icon: <Edit2 className="mr-2" />,
             onClick: () => handleEdit(clientName),
@@ -80,7 +81,11 @@ export const ClientsPage: React.FC = () => {
         <div className="flex w-full h-screen">
             <div className="flex-grow p-4 sm:p-6 overflow-hidden">
                 <div className="flex justify-between items-center mb-6">
-                    <img src={clientImage} alt='imagen cliente' className='rounded-full'/>
+                    <img
+                        src={clientImage}
+                        alt="imagen cliente"
+                        className="rounded-full"
+                    />
                     <h2 className="text-primary text-3xl font-semibold">
                         Clientes
                     </h2>

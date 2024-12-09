@@ -27,7 +27,11 @@ export const CustomDropdown: React.FC<DropdownProps> = ({ options }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
                 {options.map((option, index) => (
-                    <DropdownMenuItem className='cursor-pointer py-2' key={index} onClick={option.onClick}>
+                    <DropdownMenuItem
+                        className="cursor-pointer py-2"
+                        key={index}
+                        onClick={option.onClick}
+                    >
                         {option.icon}
                         {option.label}
                     </DropdownMenuItem>
