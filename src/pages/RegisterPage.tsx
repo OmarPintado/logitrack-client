@@ -54,12 +54,12 @@ export const RegisterPage: React.FC = () => {
                 console.log(response)
                 toast({
                     title: 'Registro de nuevo usuario',
-                    description: `Bienvenido: ${response}`,
+                    description: `¡Bienvenido: ${response.fullName}!`,
                     variant: 'default',
                     duration: 2000,
                 });
 
-                navigate('/login');
+                navigate('/');
             } catch (error) {
                 toast({
                     title: 'Error al registrar usuario',
@@ -175,7 +175,7 @@ export const RegisterPage: React.FC = () => {
                 </div>
 
                 {/* Botón de registro */}
-                <Button type="submit" className="my-4 w-full" disabled={formik.isSubmitting}>
+                <Button type="submit" className="my-4 w-full" disabled={formik.isSubmitting || !formik.isValid}>
                     {formik.isSubmitting ? 'Registrando...' : 'Registrarse'}
                 </Button>
             </form>
