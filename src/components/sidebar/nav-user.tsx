@@ -23,16 +23,11 @@ import {
     useSidebar,
 } from '@/components/ui/sidebar';
 import { useAuth } from '@/context/AuthContext.tsx';
-import { useNavigate } from 'react-router-dom';
 
 export const NavUser: React.FC = () => {
-    const navigate = useNavigate();
     const { user, logout } = useAuth();
     const { isMobile } = useSidebar();
-
-    if (!user) {
-        navigate('/');
-    }
+    
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -44,7 +39,7 @@ export const NavUser: React.FC = () => {
                         >
                             <Avatar className="h-8 w-8 rounded-lg">
                                 <AvatarImage
-                                    src={user.url_profile}
+                                    src={user.url_profile || null }
                                     alt={user.name}
                                 />
                                 <AvatarFallback className="rounded-lg">
@@ -72,7 +67,7 @@ export const NavUser: React.FC = () => {
                             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar className="h-8 w-8 rounded-lg">
                                     <AvatarImage
-                                        src={user.url_profile}
+                                        src={user.url_profile || null}
                                         alt={user.fullName}
                                     />
                                     <AvatarFallback className="rounded-lg">

@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster.tsx';
 import { ClientsPage } from '../pages/ClientsPage.tsx';
 import { CreditsPage } from '../pages/CreditsPage.tsx';
 import { AuthProvider } from '@/context/AuthContext.tsx';
+import ProtectedRoute from '@/router/ProtectedRoute.tsx';
 
 export const LoginRouter = () => {
     return (
@@ -24,6 +25,7 @@ export const LoginRouter = () => {
                     <Route
                         path="/dashboard/*"
                         element={
+                            <ProtectedRoute>
                             <Layout>
                                 <Routes>
                                     <Route
@@ -40,6 +42,7 @@ export const LoginRouter = () => {
                                     />
                                 </Routes>
                             </Layout>
+                            </ProtectedRoute>
                         }
                     />
                 </Routes>

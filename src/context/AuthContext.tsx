@@ -1,5 +1,6 @@
 // AuthContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
     user: any;
@@ -11,6 +12,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const navigate = useNavigate();
     const [user, setUser] = useState<any>(null);
     const [token, setToken] = useState<string | null>(null);
 
@@ -27,6 +29,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setToken(null);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        navigate('/');
     };
 
     return (
