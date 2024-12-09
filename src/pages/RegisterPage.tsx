@@ -7,13 +7,16 @@ import { registerUser } from '@/services/authService.ts';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from '@/hooks/use-toast.ts';
-import { UserRegister } from '@/interfaces';
 
 // Esquema de validación de Yup
 const validationSchema = Yup.object({
     fullName: Yup.string().required('El nombre es obligatorio'),
-    email: Yup.string().email('Correo electrónico no válido').required('El correo electrónico es obligatorio'),
-    password: Yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres').required('La contraseña es obligatoria'),
+    email: Yup.string()
+        .email('Correo electrónico no válido')
+        .required('El correo electrónico es obligatorio'),
+    password: Yup.string()
+        .min(6, 'La contraseña debe tener al menos 6 caracteres')
+        .required('La contraseña es obligatoria'),
     confirmPassword: Yup.string()
         .required('La confirmación de la contraseña es obligatoria')
         .oneOf([Yup.ref('password'), ''], 'Las contraseñas deben coincidir'),
@@ -35,12 +38,13 @@ export const RegisterPage: React.FC = () => {
             confirmPassword: '',
         },
         validationSchema,
-        onSubmit: async (values: UserRegister) => {
+        onSubmit: async (values) => {
             // Validar que las contraseñas coincidan
             if (values.password !== values.confirmPassword) {
                 toast({
                     title: 'Error en las contraseñas',
-                    description: 'Las contraseñas no coinciden. Por favor, verifica.',
+                    description:
+                        'Las contraseñas no coinciden. Por favor, verifica.',
                     variant: 'destructive',
                     duration: 2000,
                 });
@@ -51,7 +55,7 @@ export const RegisterPage: React.FC = () => {
             try {
                 const { confirmPassword, ...dataToSend } = values;
                 const response = await registerUser(dataToSend);
-                console.log(response)
+
                 toast({
                     title: 'Registro de nuevo usuario',
                     description: `¡Bienvenido: ${response.fullName}!`,
@@ -60,13 +64,13 @@ export const RegisterPage: React.FC = () => {
                 });
 
                 navigate('/');
-            } catch (error) {
-                toast({
-                    title: 'Error al registrar usuario',
-                    description: `${error.message}`,
-                    variant: 'destructive',
-                    duration: 2000,
-                });
+            } catch (err) {
+                    toast({
+                        title: 'Error al registrar usuario',
+                        description: `${err.message}`,
+                        variant: 'destructive',
+                        duration: 2000,
+                    });
             }
         },
     });
@@ -167,15 +171,20 @@ export const RegisterPage: React.FC = () => {
                         />
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                     </div>
-                    {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                        <div className="mt-2 text-left text-red-500 text-sm">
-                            {formik.errors.confirmPassword}
-                        </div>
-                    )}
+                    {formik.touched.confirmPassword &&
+                        formik.errors.confirmPassword && (
+                            <div className="mt-2 text-left text-red-500 text-sm">
+                                {formik.errors.confirmPassword}
+                            </div>
+                        )}
                 </div>
 
                 {/* Botón de registro */}
-                <Button type="submit" className="my-4 w-full" disabled={formik.isSubmitting || !formik.isValid}>
+                <Button
+                    type="submit"
+                    className="my-4 w-full"
+                    disabled={formik.isSubmitting || !formik.isValid}
+                >
                     {formik.isSubmitting ? 'Registrando...' : 'Registrarse'}
                 </Button>
             </form>

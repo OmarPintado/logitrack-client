@@ -1,36 +1,53 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button.tsx';
 import { Input } from '@/components/ui/input.tsx';
-import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Lock, LogInIcon, Mail } from 'lucide-react';
 import { toast } from '@/hooks/use-toast.ts';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { authenticateUser } from '@/services/authService.ts';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext.tsx';
+
+// Esquema de validación de Yup
+const validationSchema = Yup.object({
+    email: Yup.string()
+        .email('Correo electrónico no válido')
+        .required('El correo electrónico es obligatorio'),
+    password: Yup.string()
+        .min(6, 'La contraseña debe tener al menos 6 caracteres')
+        .required('La contraseña es obligatoria'),
+});
 
 export const LoginPage: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const { login } = useAuth();
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        validationSchema,
+        onSubmit: async (values) => {
+            try {
+                const response = await authenticateUser(values);
+                login(response)
+                navigate('/dashboard');
+            } catch (error) {
+                toast({
+                    title: 'Error al iniciar sesión',
+                    description: `${error.message}`,
+                    variant: 'destructive',
+                    duration: 2000,
+                });
+            }
+        },
+    });
 
     const togglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
-    };
-
-    const handleLogin = () => {
-        // Lógica para manejar el inicio de sesión
-        const credentialsValid =
-            email === 'test@example.com' || password === '123'; // Validación de ejemplo
-
-        if (!credentialsValid) {
-            // Mostrar el toast si las credenciales son incorrectas
-            toast({
-                title: 'Error de inicio de sesión',
-                description: 'Las credenciales proporcionadas son incorrectas.',
-                variant: 'destructive',
-                duration: 3000,
-            });
-        } else {
-            navigate('/dashboard');
-        }
     };
 
     return (
@@ -45,14 +62,14 @@ export const LoginPage: React.FC = () => {
                     alt="logo devuelve.pe"
                     className="flex m-auto w-1/3"
                 />
+                <form onSubmit={formik.handleSubmit}>
                 <div className="my-10 relative">
                     <Input
                         type="email"
                         id="email"
-                        value={email}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setEmail(e.target.value)
-                        }
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         placeholder="Email"
                         className="pl-10"
                     />
@@ -63,10 +80,9 @@ export const LoginPage: React.FC = () => {
                     <Input
                         type={showPassword ? 'text' : 'password'}
                         id="password"
-                        value={password}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setPassword(e.target.value)
-                        }
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         placeholder="Contraseña"
                         className="pl-10"
                     />
@@ -78,9 +94,10 @@ export const LoginPage: React.FC = () => {
                         {showPassword ? <EyeOff /> : <Eye />}
                     </button>
                 </div>
-                <Button className="my-1" onClick={handleLogin}>
-                    <LogInIcon /> Acceder
+                <Button type='submit' className="my-1" disabled={formik.isSubmitting || !formik.isValid}>
+                    <LogInIcon />  {formik.isSubmitting ? 'Accediendo...' : 'Acceder'}
                 </Button>
+                </form>
 
                 <div className="my-5">
                     <p>
