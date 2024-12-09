@@ -22,17 +22,17 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from '@/components/ui/sidebar';
+import { useAuth } from '@/context/AuthContext.tsx';
+import { useNavigate } from 'react-router-dom';
 
-export function NavUser({
-    user,
-}: {
-    user: {
-        name: string;
-        email: string;
-        avatar: string;
-    };
-}) {
+export const NavUser: React.FC = () => {
+    const navigate = useNavigate();
+    const { user, logout } = useAuth();
     const { isMobile } = useSidebar();
+
+    if (!user) {
+        navigate('/');
+    }
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -44,16 +44,16 @@ export function NavUser({
                         >
                             <Avatar className="h-8 w-8 rounded-lg">
                                 <AvatarImage
-                                    src={user.avatar}
+                                    src={user.url_profile}
                                     alt={user.name}
                                 />
                                 <AvatarFallback className="rounded-lg">
-                                    {user.name[0]}
+                                    {user.fullName[0]}
                                 </AvatarFallback>
                             </Avatar>
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-semibold">
-                                    {user.name}
+                                    {user.fullName}
                                 </span>
                                 <span className="truncate text-xs">
                                     {user.email}
@@ -72,8 +72,8 @@ export function NavUser({
                             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar className="h-8 w-8 rounded-lg">
                                     <AvatarImage
-                                        src={user.avatar}
-                                        alt={user.name}
+                                        src={user.url_profile}
+                                        alt={user.fullName}
                                     />
                                     <AvatarFallback className="rounded-lg">
                                         CN
@@ -81,7 +81,7 @@ export function NavUser({
                                 </Avatar>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-semibold">
-                                        {user.name}
+                                        {user.fullName}
                                     </span>
                                     <span className="truncate text-xs">
                                         {user.email}
@@ -112,7 +112,7 @@ export function NavUser({
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={logout}>
                             <LogOut />
                             Log out
                         </DropdownMenuItem>

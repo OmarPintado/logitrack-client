@@ -38,6 +38,7 @@ export const LoginPage: React.FC = () => {
             } catch (error) {
                 toast({
                     title: 'Error al iniciar sesión',
+                    // @ts-ignore
                     description: `${error.message}`,
                     variant: 'destructive',
                     duration: 2000,
