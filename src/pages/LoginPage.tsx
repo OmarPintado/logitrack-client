@@ -33,7 +33,7 @@ export const LoginPage: React.FC = () => {
         onSubmit: async (values) => {
             try {
                 const response = await authenticateUser(values);
-                login(response)
+                login(response);
                 navigate('/dashboard');
             } catch (error) {
                 toast({
@@ -64,40 +64,45 @@ export const LoginPage: React.FC = () => {
                     className="flex m-auto w-1/3"
                 />
                 <form onSubmit={formik.handleSubmit}>
-                <div className="my-10 relative">
-                    <Input
-                        type="email"
-                        id="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        placeholder="Email"
-                        className="pl-10"
-                    />
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-                </div>
-                <div className="my-10 relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-                    <Input
-                        type={showPassword ? 'text' : 'password'}
-                        id="password"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        placeholder="Contraseña"
-                        className="pl-10"
-                    />
-                    <button
-                        type="button"
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                        onClick={togglePasswordVisibility}
+                    <div className="my-10 relative">
+                        <Input
+                            type="email"
+                            id="email"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            placeholder="Email"
+                            className="pl-10"
+                        />
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                    </div>
+                    <div className="my-10 relative">
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                        <Input
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            placeholder="Contraseña"
+                            className="pl-10"
+                        />
+                        <button
+                            type="button"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                            onClick={togglePasswordVisibility}
+                        >
+                            {showPassword ? <EyeOff /> : <Eye />}
+                        </button>
+                    </div>
+                    <Button
+                        type="submit"
+                        className="my-1"
+                        disabled={formik.isSubmitting || !formik.isValid}
                     >
-                        {showPassword ? <EyeOff /> : <Eye />}
-                    </button>
-                </div>
-                <Button type='submit' className="my-1" disabled={formik.isSubmitting || !formik.isValid}>
-                    <LogInIcon />  {formik.isSubmitting ? 'Accediendo...' : 'Acceder'}
-                </Button>
+                        <LogInIcon />{' '}
+                        {formik.isSubmitting ? 'Accediendo...' : 'Acceder'}
+                    </Button>
                 </form>
 
                 <div className="my-5">

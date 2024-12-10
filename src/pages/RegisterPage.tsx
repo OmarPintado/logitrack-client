@@ -65,12 +65,13 @@ export const RegisterPage: React.FC = () => {
 
                 navigate('/');
             } catch (err) {
-                    toast({
-                        title: 'Error al registrar usuario',
-                        description: `${err.message}`,
-                        variant: 'destructive',
-                        duration: 2000,
-                    });
+                toast({
+                    title: 'Error al registrar usuario',
+                    // @ts-ignore
+                    description: `${err.message}`,
+                    variant: 'destructive',
+                    duration: 2000,
+                });
             }
         },
     });
