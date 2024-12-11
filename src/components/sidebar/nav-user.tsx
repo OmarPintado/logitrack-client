@@ -1,10 +1,7 @@
 import {
     BadgeCheck,
-    Bell,
     ChevronsUpDown,
-    CreditCard,
     LogOut,
-    Sparkles,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -23,6 +20,7 @@ import {
     useSidebar,
 } from '@/components/ui/sidebar';
 import { useAuth } from '@/context/AuthContext.tsx';
+import { Link } from 'react-router-dom';
 
 export const NavUser: React.FC = () => {
     const { user, logout } = useAuth();
@@ -39,7 +37,7 @@ export const NavUser: React.FC = () => {
                         >
                             <Avatar className="h-8 w-8 rounded-lg">
                                 <AvatarImage
-                                    src={user.url_profile || null }
+                                    src={user.url_profile || null}
                                     alt={user.name}
                                 />
                                 <AvatarFallback className="rounded-lg">
@@ -85,29 +83,17 @@ export const NavUser: React.FC = () => {
                             </div>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <Sparkles />
-                                Upgrade to Pro
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
-                                <BadgeCheck />
-                                Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <CreditCard />
-                                Billing
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Bell />
-                                Notifications
+                                <Link className='cursor-pointer flex items-center gap-2' to='/dashboard/user'>
+                                    <BadgeCheck className="w-5 h-5"  />
+                                    Account
+                                </Link>
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={logout}>
+                        <DropdownMenuItem className='cursor-pointer' onClick={logout}>
                             <LogOut />
                             Log out
                         </DropdownMenuItem>
@@ -116,4 +102,4 @@ export const NavUser: React.FC = () => {
             </SidebarMenuItem>
         </SidebarMenu>
     );
-}
+};

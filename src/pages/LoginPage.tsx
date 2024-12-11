@@ -34,7 +34,7 @@ export const LoginPage: React.FC = () => {
             try {
                 const response = await authenticateUser(values);
                 login(response);
-                navigate('/dashboard');
+                navigate('/dashboard/clients');
             } catch (error) {
                 toast({
                     title: 'Error al iniciar sesión',

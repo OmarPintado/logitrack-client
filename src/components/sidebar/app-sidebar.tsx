@@ -14,15 +14,10 @@ import {
 import { NavHeader } from '@/components/sidebar/nav-header.tsx';
 
 const data = {
-    user: {
-        name: 'shadcn',
-        email: 'm@example.com',
-        avatar: '/avatars/shadcn.jpg',
-    },
     projects: [
         {
             name: 'Colaboradores',
-            url: '/dashboard',
+            url: '/dashboard/collaborators',
             icon: BriefcaseBusiness,
         },
         {
@@ -53,7 +48,7 @@ export function AppSidebar() {
                 <NavProjects projects={data.projects} />
             </SidebarContent>
             <SidebarFooter>
-                <NavUser user={data.user} />
+                <NavUser/>
             </SidebarFooter>
         </Sidebar>
     );
