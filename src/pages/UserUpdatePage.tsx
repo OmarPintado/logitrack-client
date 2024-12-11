@@ -12,8 +12,6 @@ const validationSchema = Yup.object({
     email: Yup.string()
         .email('Correo electrónico no válido')
         .required('El correo electrónico es obligatorio'),
-    password: Yup.string()
-        .min(6, 'La contraseña debe tener al menos 6 caracteres')
 });
 
 export const UserUpdatePage: React.FC = () => {
@@ -27,16 +25,19 @@ export const UserUpdatePage: React.FC = () => {
         validationSchema,
         onSubmit: async (values) => {
             try {
-                const updateUserData = {
+                const updateUserData: any = {
                     ...values,
-                    file: profileImage,
                 };
+
+                if (profileImage instanceof  Blob) {
+                    updateUserData.file = profileImage;
+                }
 
                 const response = await updateUser(updateUserData);
 
                 localStorage.setItem('user', JSON.stringify({
                     ...response,
-                    profileUrl: response.url_profile || (profileImage ? URL.createObjectURL(profileImage) : "")
+                    url_profile: response.url_profile || (profileImage ? URL.createObjectURL(profileImage) : "")
                 }));
 
                 toast({
